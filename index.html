@@ -289,7 +289,8 @@
                             return
                         }
                         else{
-                            done[this.selected] = 1;    
+                            done[this.selected] = 1; 
+                            localStorage.setItem('done', JSON.stringify(done));
                             $('#result').css('display', 'none');
                             $('#main').removeClass('mask');
                             TagCanvas.SetSpeed('myCanvas', [5, 1]);
