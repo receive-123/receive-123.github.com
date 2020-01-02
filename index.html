@@ -183,7 +183,9 @@
 <script type="text/javascript">
     (function(){
         var choosed = JSON.parse(localStorage.getItem('choosed')) || {};
+        var done = JSON.parse(localStorage.getItem('done')) || {};
         console.log(choosed);
+        console.log(done);
         var speed = function(){
             return [0.1 * Math.random() + 0.01, -(0.1 * Math.random() + 0.01)];
         };
@@ -282,9 +284,16 @@
                             $('#main').addClass('mask');
                         }, 300);
                     } else {
-                        $('#result').css('display', 'none');
-                        $('#main').removeClass('mask');
-                        TagCanvas.SetSpeed('myCanvas', [5, 1]);
+                        if (done[this.selected] === 1){
+                            $('#result').css('display', 'block').html('<span>已抽过</span>');
+                            return
+                        }
+                        else{
+                            done[this.selected] = 1;    
+                            $('#result').css('display', 'none');
+                            $('#main').removeClass('mask');
+                            TagCanvas.SetSpeed('myCanvas', [5, 1]);
+                        }
                     }
                     this.running = !this.running;
                 }
